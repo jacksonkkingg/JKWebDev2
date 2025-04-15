@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero"> </section>
+
+    <section id="gallery" class="video-container fade-in">
+        <h2>Gallery</h2>
+
+        <div class="video-row">
+            <video controls>
+                <source src="VID/DMUY1123_fa24_King_Jackson_rps.mp4">
+            </video>
+            <div class="video-description">
+                <p>Bomb, Bottle, Fire is an interactive reimagining of the classic game "Rock, Paper, Scissors," 
+                    placing it in a uniquely stylized digital world. The project explores how familiar mechanics 
+                    can be transformed through visual storytelling and sound design, inviting players to engage 
+                    with the game in a fresh and unexpected way. Every visual asset was designed in Photoshop to 
+                    achieve a nostalgic, pixelated aesthetic reminiscent of early video games. The interactive 
+                    prototype was built using Figma, while sound effects and music were assembled in Premiere Pro,
+                     blending and remixing iconic themes from classic gaming history to reinforce the retro-inspired 
+                     experience.</p>
+            </div>
+        </div>
+
+        <div class="video-row">
+            <video controls>
+                <source src="VID/CaveRave (1).mp4">
+            </video>
+            <div class="video-description">
+                <p>
+                    Cave Rave was designed to foster a safe and immersive space 
+                    for emerging figures within the Bay Area's techno scene, transforming 
+                    an unconventional location into a vibrant celebration of underground electronic music. 
+                    The event sought to push the boundaries of traditional nightlife, blending raw, industrial 
+                    aesthetics with DIY sound and lighting. I contributed to the event's visual identity by 
+                    co-designing the flyer in Photoshop and managed its presence on Resident Advisor, overseeing
+                     ticket sales, guest lists, advertising, and communications. Additionally, I played a hands-on
+                      role in the event's production, setting up the lighting rig and generator to create an atmospheric
+                       and high-energy environment. Cave Rave was featured twice in 
+                       The <a href="https://sfstandard.com/2024/07/09/secret-sutro-baths-rave-cave-san-francisco-is-back/">SF Standard</a>, 
+                       named the top event in the Bay Area for its weekend on <a href="https://ra.co/events/2070573">Resident Advisor</a>, 
+                       and recognized as an RA Pick. I collaborated with Cameran Ford, Ambar F. Marquez, and Elan Hebert.</p>
+            </div>
+        </div>
+
+        <div class="image-gallery-container fade-in">
+        <div class="image-grid">
+            <img src="IMG/Home1.png" alt="Gallery Image 1" class="lightbox-img">
+            <img src="IMG/Home5.png" alt="Gallery Image 2" class="lightbox-img">
+            <img src="IMG/Home8.png" alt="Gallery Image 3" class="lightbox-img">
+            <img src="IMG/Home9.png" alt="Gallery Image 4" class="lightbox-img">
+            <img src="IMG/Home2.png" alt="Gallery Image 5" class="lightbox-img">
+            <img src="IMG/Home4.png" alt="Gallery Image 6" class="lightbox-img">
+            <img src="IMG/Home6.png" alt="Gallery Image 7" class="lightbox-img">
+            <img src="IMG/Home3.png" alt="Gallery Image 8" class="lightbox-img">
+            <img src="IMG/Home7.png" alt="Gallery Image 9" class="lightbox-img">
+        </div>
+            <p class="gallery-description">Home is a visual exploration of personal spaces and the ways 
+                in which they reflect the identities of those who inhabit them. Through intimate, 
+                documentary-style photography, the project seeks to capture the essence of my closest 
+                friends by observing the way they curate and arrange their environments. Over several 
+                visits spanning weeks, I documented each space with a DSLR, taking over a thousand photos 
+                to authentically encapsulate the details and atmosphere of their homes. The final series was 
+                distilled to 9s carefully selected images, refined and color-graded in Lightroom to enhance 
+                their emotional and aesthetic depth. Natalie Cohen is featured.
+            </p>
+</div>
+
+    </section>
+
+    <section id="contact" class="fade-in">
+        <h2>Contact Me</h2>
+        <form action="#" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+    
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+    
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+    
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </section> 
+
+    <div id="trail-container"></div>
+
+    <script>
+        const faders = document.querySelectorAll('.fade-in');
+      
+        const appearOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px"
+        };
+      
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('appear');
+            observer.unobserve(entry.target);
+          });
+        }, appearOptions);
+      
+        faders.forEach(fader => {
+          appearOnScroll.observe(fader);
+        });
+      </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const closeBtn = document.querySelector('.close');
+      const galleryImages = document.querySelectorAll('.lightbox-img');
+  
+      galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+          lightbox.style.display = 'flex';
+          lightboxImg.src = img.src;
+        });
+      });
+  
+      closeBtn.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+      });
+  
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          lightbox.style.display = 'none';
+        }
+      });
+    });
+  </script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const trailContainer = document.getElementById('trail-container');
+      const trailTexts = ["PLAY", "✶", "~", "JK", "x"];
+  
+      document.addEventListener('mousemove', function (e) {
+        const text = document.createElement('div');
+        text.classList.add('trail-text');
+        text.innerText = trailTexts[Math.floor(Math.random() * trailTexts.length)];
+        text.style.left = e.clientX + 'px';
+        text.style.top = e.clientY + 'px';
+  
+        trailContainer.appendChild(text);
+  
+        setTimeout(() => {
+          text.remove();
+        }, 800); // matches CSS animation
+      });
+    });
+  </script>
+  
+
+<div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+  </div>
+
+</body>
+</html>
