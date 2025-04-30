@@ -3,7 +3,13 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Tahoma;
+
 }
+
+
+.element::-webkit-scrollbar {
+    display: none;
+  }
 
 @font-face {
     font-family: 'Helvitcamazing';
@@ -28,8 +34,9 @@
   }
 
 body {
-    cursor: url("IMG/cursorrr.png"), auto;
+    /* cursor: url("IMG/cursorrr.png"), auto; */
 }
+
 
 h2 {
     font-size: 4vw;
@@ -242,13 +249,17 @@ input, textarea {
   }
 
   #about-block {
+    position: fixed;
+    top: 60px; 
+    left: 0;
+    width: 100vw;
     background: white;
     color: black;
-    padding: 5vh 5vw;
-    padding-top: 40vh
-    border-top: 5px solid black;
+    z-index: 999;
     display: none;
-    animation: fadeIn 0.5s ease forwards;
+    padding: 5vh 5vw;
+    border-top: 5px solid black;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   
   .about-inner {
@@ -303,29 +314,42 @@ input, textarea {
   }  
   
   .gsap-banner {
-    overflow: hidden;
-    width: 100%;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
+    width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background: white;
-    padding: 2vh 0;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .video-container .gsap-banner {
+    position: relative;
+    left: -10vw;
+    width: 100vw;
   }
   
   .gsap-track {
     display: flex;
-    gap: 3vw;
+    width: max-content; 
   }
   
   .gsap-track img {
-    height: 150px;
+    height: 25vh;
+    width: auto;
+    margin: 0 2vw;
+    padding: 0;
+    display: block;
     flex-shrink: 0;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+    border-radius: 20px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
   }
   
   .gsap-track img:hover {
     transform: scale(1.1);
+    filter: invert(1); 
   }
+  
   
   .modal {
     display: none;
@@ -333,22 +357,28 @@ input, textarea {
     z-index: 4000;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.95);
-    justify-content: center;
-    align-items: center;
-    padding: 5vh 5vw;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    overflow: hidden;
   }
-  
+
   .modal-content {
+    width: 80vw; 
+    height: 80vh; 
+    margin: 10vh auto; 
     background: white;
     padding: 3vh;
-    max-width: 900px;
-    width: 100%;
     border-radius: 10px;
-    text-align: center;
+    box-sizing: border-box;
     position: relative;
+    overflow-y: auto; 
+  }
+  
+  .modal-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .modal-slider img {
@@ -358,6 +388,9 @@ input, textarea {
   }
   
   .modal-controls {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
     margin: 2vh 0;
   }
   
@@ -373,12 +406,13 @@ input, textarea {
   }
   
   .modal-close {
-    position: absolute;
+    position: fixed;
     top: 2%;
     right: 2%;
     font-size: 2vw;
     color: black;
     cursor: pointer;
+    z-index: 5000;
   }
   
   .modal-bio {
@@ -388,24 +422,118 @@ input, textarea {
     color: black;
   }
   
+  #hamburger {
+    display: none;
+    font-size: 6vw;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 999;
+    padding: 1vh 2vw;
+  }
 
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-    }
-    .video-row {
-        flex-direction: column;
-        text-align: center;
-    }
-    video, .video-description {
-        width: 100%;
-    }
+  .nav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
 
+  @media (max-width: 768px) {
+
+    #hamburger {
+        display: block;
+      }
+
+    #nav-links {
+        display: none;
+        flex-direction: column;
+        background: black;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100vw;
+        padding: 2vh 0;
+        z-index: 998;
+      }
+    
+    #nav-links.show {
+        display: flex;
+      }
+
+    .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 4vw;
+      }
+
+    .gsap-track img {
+      height: 20vh;
+      margin: 0 4vw;
+    }
+  
+    .modal-content {
+      width: 95vw;
+      height: 90vh;
+      margin: 5vh auto;
+      padding: 2vh 4vw;
+    }
+  
+    .modal-slider img {
+      max-height: 40vh;
+    }
+  
+    .modal-controls {
+      flex-direction: column;
+      gap: 1vh;
+    }
+  
+    .modal-controls button {
+      font-size: 4vw;
+      padding: 1vh 2vw;
+    }
+  
+    .modal-bio {
+      font-size: 3.5vw;
+      text-align: left;
+    }
+  
+    .video-container {
+      width: 90%;
+      margin: 5vh auto;
+      flex-direction: column;
+      gap: 2vh;
+    }
+  
     .image-grid {
-        grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
     }
-
-    .contact-container {
-        width: 80%;
+  
+    nav ul {
+      flex-direction: column;
+      gap: 2vh;
+      padding: 2vh 0;
     }
-}
+  
+    nav ul li a {
+        font-size: 5vw;
+        padding: 1vh 0;
+      }
+    
+    nav {
+        position: relative;
+      }
+  
+    .about-inner {
+      font-size: 3.5vw;
+    }
+  
+    .skills-list {
+      flex-direction: column;
+      gap: 1vh;
+      font-size: 4vw;
+    }
+  }
+  
